@@ -63,7 +63,6 @@ Modules:
 
 Food-Restaurent/
   frontend/        # React App
-  backend/
     spring/        # Spring Boot App
   README.md
 
