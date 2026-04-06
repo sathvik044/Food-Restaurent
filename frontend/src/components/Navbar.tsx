@@ -32,7 +32,7 @@ const Navbar = () => {
           <Link to="/cart" className="btn-primary d-none d-md-block" style={{ textDecoration: 'none', position: 'relative' }}>
             View Cart
             {cartCount > 0 && (
-              <span 
+              <span
                 className="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle"
                 style={{ fontSize: '0.7rem' }}
               >

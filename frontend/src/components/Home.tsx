@@ -4,13 +4,13 @@ import { useNavigate } from "react-router-dom";
 const restaurants: Restaurant[] = [
   { id: 1, name: "Burger Hub" },
   { id: 2, name: "Pizza Palace" },
-  { id :3, name:"Fried Chicken"},
+  { id: 3, name: "Fried Chicken" },
   { id: 4, name: "Fast Food Corner" },
   { id: 5, name: "Juices" },
-  {id: 6, name: "fruits"}
+  { id: 6, name: "fruits" }
 ];
 
- const categoryImages: Record<string, string> = {
+const categoryImages: Record<string, string> = {
   "Burger Hub": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd",
   "Pizza Palace": "https://plus.unsplash.com/premium_photo-1667682942060-977925f9a54b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGl6emFzfGVufDB8fDB8fHww",
   "Fried Chicken": "https://images.unsplash.com/photo-1562967916-eb82221dfb92",
@@ -27,7 +27,7 @@ const Home = () => {
     if (name === "Pizza Palace") return "pizza";
     if (name === "Fried Chicken") return "Fried Chicken";
     if (name === "Fast Food Corner") return "Fast Food Corner";
-    if (name ===  "Juices") return "Juices";
+    if (name === "Juices") return "Juices";
     if (name === "fruits") return "fruits";
   };
 
@@ -45,33 +45,33 @@ const Home = () => {
       <div className="card-grid">
         {restaurants.map((res) => (
           <div key={res.id} className="premium-card">
-            
-           <div
-  style={{
-    height: "160px",
-    background: "linear-gradient(45deg, #1a1a1a, #2a2a2a)",
-    borderRadius: "calc(var(--radius) - 4px)",
-    overflow: "hidden", // important
-  }}
->
-  <img
-    src={
-      categoryImages[res.name] ||
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836"
-    }
-    alt={res.name}
-    style={{
-      width: "100%",
-      height: "100%",
-      objectFit: "cover",
-    }}
-    onError={(e) => {
-      e.currentTarget.onerror = null;
-      e.currentTarget.src =
-        "https://images.unsplash.com/photo-1504674900247-0877df9cc836";
-    }}
-  />
-</div>
+
+            <div
+              style={{
+                height: "160px",
+                background: "linear-gradient(45deg, #1a1a1a, #2a2a2a)",
+                borderRadius: "calc(var(--radius) - 4px)",
+                overflow: "hidden", // important
+              }}
+            >
+              <img
+                src={
+                  categoryImages[res.name] ||
+                  "https://images.unsplash.com/photo-1504674900247-0877df9cc836"
+                }
+                alt={res.name}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src =
+                    "https://images.unsplash.com/photo-1504674900247-0877df9cc836";
+                }}
+              />
+            </div>
             <div>
               <h3 className="mb-1" style={{ fontSize: '1.25rem' }}>
                 {res.name}
