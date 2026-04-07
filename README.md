@@ -94,14 +94,6 @@ Follow these instructions to get a local copy up and running for development and
 
 ---
 
-## 🎨 Design Philosophy: "Indian Innovation"
-
-FoodApp provides more than just utility; it delivers a digital cultural experience:
-- **Color Palette**: We utilize Deep Saffron (`hsl(32, 95%, 60%)`) for energy and appetite, contrasted against sleek dark modes or clean white backgrounds for a premium feel.
-- **Typography**: The interface leverages modern system fonts combined with robust weights to ensure high legibility while feeling cutting-edge.
-- **Glassmorphism**: Translucent navbars and elevated cards provide a sense of depth, mimicking modern architectural aesthetics, making the UI feel responsive and "alive."
-
----
 
 ## 👨‍💻 Development & Contribution
 Ensure that backend APIs are running before interacting with dynamic frontend components (like the Menu or Best Sellers) to avoid fetch errors.

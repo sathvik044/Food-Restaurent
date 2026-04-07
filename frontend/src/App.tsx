@@ -11,7 +11,6 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 function App(){
   return (
     <div >
-      <h1 style={{ color: 'blue' }}>welcome to restaurent</h1>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
