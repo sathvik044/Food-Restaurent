@@ -11,6 +11,10 @@ const Navbar = () => {
   const hideCartButton = isAuthPage;
   const navClassName = `glass-nav py-3${isAuthPage ? " auth-nav" : ""}`;
 
+  if (isAuthPage) {
+    return null;
+  }
+
   return (
     <nav className={navClassName}>
       <div className="container d-flex justify-content-between align-items-center">
