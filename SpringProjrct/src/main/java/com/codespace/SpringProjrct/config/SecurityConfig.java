@@ -5,21 +5,28 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
-
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.servlet.Filter;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+@Autowired
+   private JwtFilter jwtFilter;
 
    @Bean
 public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
         .csrf(csrf -> csrf.disable())
+        .cors(Customizer.withDefaults())
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/","/api/login","/api/register","/api/home").permitAll()
-            .anyRequest().permitAll()
+            .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+            .requestMatchers("/", "/api/login", "/api/register", "/api/home").permitAll()
+            .anyRequest().authenticated()
         )
-        .formLogin(form -> form.permitAll())
-        .httpBasic(httpBasic -> httpBasic.disable());
+        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
     return http.build();
 }

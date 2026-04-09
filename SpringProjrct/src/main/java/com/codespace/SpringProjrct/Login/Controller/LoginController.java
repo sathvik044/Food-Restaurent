@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin
 public class LoginController {
 
     @Autowired
