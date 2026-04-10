@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import jakarta.servlet.Filter;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 @Configuration
