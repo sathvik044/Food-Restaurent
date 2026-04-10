@@ -5,8 +5,9 @@ import CartPage from './components/cart';
 import Profile from './components/Profile';
 import Login from './components/Login';
 import Register from './components/Register';
-import Product from './components/product';
+import Product from './components/Product';
 import { Routes, Route, Navigate } from 'react-router-dom';
+
 
 function App(){
   return (

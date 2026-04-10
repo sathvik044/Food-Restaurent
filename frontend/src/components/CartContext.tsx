@@ -31,15 +31,35 @@ export const CartContext = createContext<CartContextType | undefined>(undefined)
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
-  const userId = 2; // Hardcoded for now until authentication is fully implemented
+  
+  // ✅ AUTH HELPERS
+  const getUserData = () => {
+    const user = localStorage.getItem("user");
+    return user ? JSON.parse(user) : null;
+  };
+
+  const getAuthHeader = () => {
+    const userRole = getUserData();
+    return userRole?.token ? { Authorization: `Bearer ${userRole.token}` } : {};
+  };
+
+  const getUserId = () => {
+    const userRole = getUserData();
+    return userRole?.id || 0;
+  };
 
   const fetchCart = () => {
+    const userId = getUserId();
+    if (!userId) return;
+
     axios
-      .get(`http://localhost:8081/api/cart/user/${userId}`)
+      .get(`http://localhost:8081/api/cart/user/${userId}`, {
+        headers: getAuthHeader()
+      })
       .then((res) => {
         setCart(res.data);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error("Fetch cart error:", err));
   };
 
   useEffect(() => {
@@ -47,24 +67,37 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const addToCart = (item: MenuItem) => {
+    const userId = getUserId();
+    if (!userId) {
+      alert("Please login first! 🔐");
+      return;
+    }
+
     axios
-      .post(`http://localhost:8081/api/cart?userId=${userId}&menuId=${item.id}&quantity=1`)
+      .post(`http://localhost:8081/api/cart?userId=${userId}&menuId=${item.id}&quantity=1`, {}, {
+        headers: getAuthHeader()
+      })
       .then(() => fetchCart())
-      .catch(err => console.error(err));
+      .catch(err => console.error("Add to cart error:", err));
   };
 
   const removeFromCart = (id: number) => {
     axios
-      .delete(`http://localhost:8081/api/cart/${id}`)
+      .delete(`http://localhost:8081/api/cart/${id}`, {
+        headers: getAuthHeader()
+      })
       .then(() => fetchCart())
-      .catch(err => console.error(err));
+      .catch(err => console.error("Remove from cart error:", err));
   };
 
   const clearCart = () => {
+    const userId = getUserId();
     axios
-      .delete(`http://localhost:8081/api/cart/clear/${userId}`)
+      .delete(`http://localhost:8081/api/cart/clear/${userId}`, {
+        headers: getAuthHeader()
+      })
       .then(() => fetchCart())
-      .catch(err => console.error(err));
+      .catch(err => console.error("Clear cart error:", err));
   };
 
   return (

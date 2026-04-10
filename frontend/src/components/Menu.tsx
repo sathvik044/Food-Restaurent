@@ -9,6 +9,7 @@ type MenuItem = {
 };
 
 import { useCart } from "./CartContext";
+import { getAuthHeader } from "../authUtils";
 
 const Menu = () => {
   const { type } = useParams(); // burger / pizza / food
@@ -16,10 +17,15 @@ const Menu = () => {
   const { addToCart } = useCart();
 
   useEffect(() => {
-    fetch(`http://localhost:8081/api/menu/${type}`)
-      .then((res) => res.json())
+    fetch(`http://localhost:8081/api/menu/${type}`, {
+      headers: getAuthHeader()
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch menu");
+        return res.json();
+      })
       .then((data) => setItems(data))
-      .catch((err) => console.error(err));
+      .catch((err) => console.error("Menu fetch error:", err));
   }, [type]);
 
 
@@ -47,7 +53,7 @@ const Menu = () => {
                 borderRadius: "calc(var(--radius) - 4px)",
               }}
               onError={(e) => {
-                e.target.src = "https://via.placeholder.com/300x200?text=Food+Image";
+                (e.currentTarget as HTMLImageElement).src = "https://via.placeholder.com/300x200?text=Food+Image";
               }}
             />
             {/* Content */}

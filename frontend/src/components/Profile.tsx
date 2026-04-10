@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 
+import { getAuthHeader } from "../authUtils";
+
 const Profile = () => {
-  const [profile, setProfile] = useState([]);
+  const [profile, setProfile] = useState<any[]>([]);
 
   useEffect(() => {
-    console.log("API CALLED ✅");
-
-    fetch("http://localhost:8081/api/users")
-      .then((res) => res.json())
+    fetch("http://localhost:8081/api/users", {
+      headers: getAuthHeader(),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch users");
+        return res.json();
+      })
       .then((data) => {
         if (Array.isArray(data)) {
           setProfile(data);
@@ -15,7 +20,7 @@ const Profile = () => {
           console.error("API response is not an array:", data);
         }
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error("Profile fetch error:", err));
   }, []);
 
   return (
