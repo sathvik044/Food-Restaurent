@@ -53,7 +53,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     if (!userId) return;
 
     axios
-      .get(`http://localhost:8081/api/cart/user/${userId}`, {
+      .get(`https://restaurent-backend-u62e.onrender.com/api/cart/user/${userId}`, {
         headers: getAuthHeader()
       })
       .then((res) => {
@@ -74,7 +74,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }
 
     axios
-      .post(`http://localhost:8081/api/cart?userId=${userId}&menuId=${item.id}&quantity=1`, {}, {
+      .post(`https://restaurent-backend-u62e.onrender.com/api/cart?userId=${userId}&menuId=${item.id}&quantity=1`, {}, {
         headers: getAuthHeader()
       })
       .then(() => fetchCart())
@@ -83,7 +83,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const removeFromCart = (id: number) => {
     axios
-      .delete(`http://localhost:8081/api/cart/${id}`, {
+      .delete(`https://restaurent-backend-u62e.onrender.com/api/cart/${id}`, {
         headers: getAuthHeader()
       })
       .then(() => fetchCart())
@@ -93,7 +93,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const clearCart = () => {
     const userId = getUserId();
     axios
-      .delete(`http://localhost:8081/api/cart/clear/${userId}`, {
+      .delete(`https://restaurent-backend-u62e.onrender.com/api/cart/clear/${userId}`, {
         headers: getAuthHeader()
       })
       .then(() => fetchCart())

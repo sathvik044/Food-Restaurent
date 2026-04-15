@@ -17,7 +17,7 @@ const Menu = () => {
   const { addToCart } = useCart();
 
   useEffect(() => {
-    fetch(`http://localhost:8081/api/menu/${type}`, {
+    fetch(`https://restaurent-backend-u62e.onrender.com/api/menu/${type}`, {
       headers: getAuthHeader()
     })
       .then((res) => {

@@ -6,7 +6,7 @@ const Profile = () => {
   const [profile, setProfile] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:8081/api/users", {
+    fetch("https://restaurent-backend-u62e.onrender.com/api/users", {
       headers: getAuthHeader(),
     })
       .then((res) => {

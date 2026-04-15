@@ -16,7 +16,7 @@ const Product = () => {
   const { addToCart } = useCart();
 
   useEffect(() => {
-    fetch("http://localhost:8081/api/products", {
+    fetch("https://restaurent-backend-u62e.onrender.com/api/products", {
       headers: getAuthHeader(),
     })
       .then((res) => {
