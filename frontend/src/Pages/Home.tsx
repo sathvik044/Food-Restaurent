@@ -1,4 +1,4 @@
-import type { Restaurant } from "./Types";
+import type { Restaurant } from "../components/Types";
 import { useNavigate } from "react-router-dom";
 
 const restaurants: Restaurant[] = [

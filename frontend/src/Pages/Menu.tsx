@@ -8,7 +8,7 @@ type MenuItem = {
   image?: string;
 };
 
-import { useCart } from "./CartContext";
+import { useCart } from "../components/CartContext";
 import { getAuthHeader } from "../authUtils";
 
 const Menu = () => {

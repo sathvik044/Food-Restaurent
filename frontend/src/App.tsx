@@ -1,18 +1,18 @@
 import Navbar from './components/Navbar';
-import Home from './components/Home';
-import Menu from './components/Menu';
+import Home from './Pages/Home';
+import Menu from './Pages/Menu';
 import CartPage from './components/cart';
 import Profile from './components/Profile';
-import Login from './components/Login';
-import Register from './components/Register';
+import Login from './Pages/Login';
+import Register from './Pages/Register';
 import Product from './components/Product';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 
-function App(){
+function App() {
   return (
     <div >
-      <Navbar />
+      <Navbar />  
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Home" element={<Home />} />

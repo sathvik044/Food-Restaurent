@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.codespace.SpringProjrct.User.Enum.UserRole;
 
 @Entity
 @Data
@@ -15,6 +16,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
     private String name;
     private String email;
     private String password;

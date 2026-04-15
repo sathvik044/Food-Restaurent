@@ -15,14 +15,26 @@ public class SecurityConfig {
 @Autowired
    private JwtFilter jwtFilter;
 
-   @Bean
+@Bean
 public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
         .csrf(csrf -> csrf.disable())
         .cors(Customizer.withDefaults())
         .authorizeHttpRequests(auth -> auth
+
+            // ✅ Preflight
             .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
+            // ✅ Public APIs
             .requestMatchers("/", "/api/login", "/api/register", "/api/home").permitAll()
+
+            // 👑 ADMIN only
+            .requestMatchers("/api/admin/**").hasRole("ADMIN")
+
+            // 👤 USER + ADMIN
+            .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
+
+            // 🔐 Everything else
             .anyRequest().authenticated()
         )
         .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

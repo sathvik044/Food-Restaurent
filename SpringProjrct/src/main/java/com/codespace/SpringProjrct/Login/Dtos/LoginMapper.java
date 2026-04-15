@@ -21,7 +21,7 @@ public class LoginMapper {
                 .build();
     }
     public static User toEntity(String email, String password) {
-        // TODO Auto-generated method stub
+      
         throw new UnsupportedOperationException("Unimplemented method 'toEntity'");
     }
 }
