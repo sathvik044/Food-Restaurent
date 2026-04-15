@@ -1,0 +1,45 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: restaurent-db
+    environment:
+      POSTGRES_DB: Hcl
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+    ports:
+      - "5432:5432"
+    networks:
+      - restaurent-network
+
+  backend:
+    build:
+      context: ./SpringProjrct
+      dockerfile: Dockerfile
+    container_name: restaurent-backend
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/Hcl
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres123
+      CORS_ALLOWED_ORIGINS: http://localhost
+    depends_on:
+      - db
+    networks:
+      - restaurent-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: restaurent-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - restaurent-network
+
+networks:
+  restaurent-network:
+    driver: bridge
