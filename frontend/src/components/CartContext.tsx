@@ -56,10 +56,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       .get(`https://restaurent-backend-u62e.onrender.com/api/cart/user/${userId}`, {
         headers: getAuthHeader()
       })
-      .then((res) => {
+      .then((res: any) => {
         setCart(res.data);
       })
-      .catch((err) => console.error("Fetch cart error:", err));
+      .catch((err: any) => console.error("Fetch cart error:", err));
   };
 
   useEffect(() => {
@@ -78,7 +78,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         headers: getAuthHeader()
       })
       .then(() => fetchCart())
-      .catch(err => console.error("Add to cart error:", err));
+      .catch((err: any) => console.error("Add to cart error:", err));
   };
 
   const removeFromCart = (id: number) => {
@@ -87,7 +87,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         headers: getAuthHeader()
       })
       .then(() => fetchCart())
-      .catch(err => console.error("Remove from cart error:", err));
+      .catch((err: any) => console.error("Remove from cart error:", err));
   };
 
   const clearCart = () => {
@@ -97,7 +97,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         headers: getAuthHeader()
       })
       .then(() => fetchCart())
-      .catch(err => console.error("Clear cart error:", err));
+      .catch((err: any) => console.error("Clear cart error:", err));
   };
 
   return (
