@@ -3,17 +3,13 @@ FROM eclipse-temurin:21-jdk-alpine AS build
 
 WORKDIR /app
 
-# Copy Maven wrapper and configuration
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
+# Copy ALL files from the root directory to ensure Maven wrapper and pom.xml are present
+COPY . .
+
 # Ensure mvnw has executable permissions
 RUN chmod +x mvnw
 
-# Resolve dependencies (cached unless pom.xml changes)
-RUN ./mvnw dependency:go-offline
-
-# Copy source and build
-COPY src ./src
+# Resolve dependencies and build
 RUN ./mvnw clean package -DskipTests
 
 # Run stage
